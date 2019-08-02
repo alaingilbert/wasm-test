@@ -1,0 +1,13 @@
+<script src="../wasm_exec.js"></script>
+<script>
+function startCb() {
+    console.log(window.goFn(1, 2));
+    console.log(window.goFn(1, "2"));
+    console.log(window.goFn(3, 4.2));
+}
+
+const go = new Go();
+WebAssembly.instantiateStreaming(fetch("main.wasm"), go.importObject).then((result) => {
+    go.run(result.instance);
+});
+</script>
